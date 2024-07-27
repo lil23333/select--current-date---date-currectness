@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mrBin</title>
+<style>
+body {
+background-color : #5F9EA0;
+}
+div {
+border: 1px solid #333;
+box-shadow: 8px 5px 8px;
+heigth : 30px;
+width  : 50px;
+backgroung-color : #F7F8A0;
+}
+.color1 {
+background-color : #DC143C;
+}
+
+.hh {
+font-weigth : bold;
+font-size : 24 px;
+}
+
+.color2 {
+background-color : #2F4F4F;
+}
+.hidden {
+display : none;
+}
+
+table {
+border-collapse: collapse;
+border : 1 px solid grey;
+}
+
+td {
+padding: 10px 20px;
+border : 1px solid grey;
+background-color : #F0F8FF;
+}
+
+</style>
+
+</head>
+
+<body>
+<form>
+<label name = 'mon' id = 'month'>month
+<select id = 'mon'>month
+</select>
+</label>
+</form>
+
+<form>
+<label name = 'day' id = 'days'>days
+<select id = 'day'>days
+</select>
+</label>
+</form>
+
+
+<form>
+<label name = 'year' id = 'years'>year
+<select id = 'year'>year
+</select>
+</label>
+</form>
+
+<script>
+let day = document.querySelector('#day');
+let year = document.querySelector('#year');
+let mon = document.querySelector('#mon');
+
+for (let i =0; i < 31; i++ ) {
+    let option = document.createElement('option');
+    let n = i+1;
+    option.value = n; option.textContent = n;
+    day.appendChild(option);
+}
+let arr = ['January', 'February', 'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 'October', 'November', 'December'];
+for (let i =0; i < arr.length; i++ ) {
+    let option = document.createElement('option');
+    let n = arr[i];
+    option.value = i; option.textContent = n;
+    mon.appendChild(option);
+}
+
+
+let arr1 = [];
+let date = new Date();
+let fullYear = date.getFullYear();
+let n = fullYear - 5;
+for (let i = n; i < 2029; i++) {
+    arr1.push(i);
+}
+
+for (let i =0; i < arr1.length; i++ ) {
+    let option = document.createElement('option');
+    let n = arr1[i];
+    option.value = n; option.textContent = n;
+    year.appendChild(option);
+}
+
+let curDay = date.getDate();
+let curMonth = date.getMonth();
+let curYear = date.getFullYear();
+
+day.value = curDay;
+year.value = curYear;
+mon.value = curMonth;
+
+function checkDate (year, mon, day) {
+        let date1 = new Date (year,mon,day);
+    return date1.getFullYear() == year && date1.getMonth() ==  mon &&
+    date1.getDate() == day;
+}
+
+function selectChange() {
+    if(checkDate(year.value, mon.value, day.value)) {
+        console.log('yes');
+    } else {
+        console.log('no');
+        this.dataset = this.dataset.default;
+    }}
+
+day.addEventListener('change',selectChange);
+mon.addEventListener('change',selectChange);
+year.addEventListener('change',selectChange);
+
+
+</script>
+
+
+</body>
+</html>
